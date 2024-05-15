@@ -1,12 +1,17 @@
 import Link from 'next/link'
-import React from 'react'
+import React, { Suspense } from 'react'
+import UserTable from './UserTable'
 
 const UsersPage = () => {
   return (
     <div>
-      UsersPage
+    
+   <Link href='/users/new' className='btn'>New User</Link>
+    
+    <Suspense fallback={<p >Loading...</p>}>
 
-
+    <UserTable/>
+    </Suspense>
     </div>
   )
 }
