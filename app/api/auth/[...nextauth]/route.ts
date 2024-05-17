@@ -12,7 +12,7 @@ export const authOptions={
         
         })
     ],
-    secret:process.env.NEXTAUTH_KEY,
+    secret:process.env.NEXT_AUTH_KEY,
     debug:true
 }
 
