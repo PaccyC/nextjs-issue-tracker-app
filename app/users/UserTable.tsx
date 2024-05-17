@@ -24,7 +24,7 @@ const UserTable = async() => {
         <tbody>
      {users.map((user:User)=>(
 
-         <tr>
+         <tr key={user.id}>
              <td>{user.name}</td>
              <td>{user.email}</td>
          </tr>
