@@ -1,19 +1,22 @@
 "use client"
 
-import { CldUploadWidget,CldImage } from 'next-cloudinary'
+import { CldUploadWidget,CldImage, CloudinaryUploadWidgetResults } from 'next-cloudinary'
 import { sources } from 'next/dist/compiled/webpack/webpack'
 import { useState } from 'react'
 
-interface CloudnaryResult{
-  public_id:string
-}
+
+
 const UploadPage = () => {
-  const [publicId,setPublicId]=useState('')
+  const [imageUrl, setImageUrl] = useState(null);
+
+  const handleUpload = (result:any) => {
+    if (result.event === 'success') {
+      setImageUrl(result.info.secure_url);
+    }
+  };
   return (
     <>
-    {publicId &&
-     <CldImage src={publicId} width={270} height={180} alt=''/>
-    }
+    
     <CldUploadWidget 
     options={
       {
@@ -22,21 +25,27 @@ const UploadPage = () => {
         maxFiles:5
       }
     }
-    onUploadAdded={(result,widget)=>{
-      
-        console.log(result);
-    if(result.event !== "success") return
-  
-
-    const info = result.info as CloudnaryResult
-     setPublicId(info.public_id)
-    }}
+    
     uploadPreset='cgctjgtk'>
         {({open})=><button 
         className='btn btn-primary'
         onClick={()=>open()}
         >Upload</button>}
+        
     </CldUploadWidget>
+
+    {imageUrl && (
+        <div>
+          <h3>Uploaded Image:</h3>
+          <CldImage
+            src={imageUrl}
+            alt="Uploaded Image"
+            width={300}
+            height={300}
+            crop="fill"
+          />
+        </div>
+      )}
     </>
     
   )
