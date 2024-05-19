@@ -3,23 +3,29 @@
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import React from 'react'
+import {AiFillBug} from 'react-icons/ai'
 
 const NavBar = () => {
 
-  const {status,data:session}= useSession()
-
+  const links=[
+    {label:'Dashboard',href:'/'},
+    {label:"Issues",href:'/issues'}
+  ]
 
   
   return (
-    <div className='flex bg-slate-200 p-5 space-x-3w'>
-      <Link href='/' className='mr-5'>Home</Link>
-      {status === "loading" && <div>Loading...</div>}
-      {status === "authenticated" && <div>
-        {session.user!.name}
-        <Link href='/api/auth/signout' className='ml-3'>Sign Out</Link>
-        </div>}
-      {status === "unauthenticated" && <Link href='/api/auth/signin' className='mr-5'>Sign In</Link>}
-    </div>
+   <nav className='flex space-x-6 border-b mb-5 px-5 h-14 items-center'>
+    <Link href="/"><AiFillBug/></Link>
+    <ul className='flex space-x-6 '>
+      {links.map((link)=>(
+   
+        <Link key={link.href} 
+        className='text-zinc-500 hover:text-zinc-800 transition-colors' href={link.href}>{link.label}</Link>
+     
+      
+      ))}
+    </ul>
+   </nav>
   )
 }
 
