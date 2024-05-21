@@ -25,14 +25,7 @@ const NewIssuePage = () => {
     resolver:zodResolver(createIssueSchema)
   })
   
-  return (
-    <div className='max-w-xl'>
-      {error && <Callout.Root color='red' className='mb-5'>
-        <Callout.Text>
-          {error}
-        </Callout.Text>
-        </Callout.Root>}
-      <form onSubmit={handleSubmit(async(data)=>{
+  const onSubmit= handleSubmit(async(data)=>{
             try {
               setIsSumbmitting(true)
               await axios.post("/api/issues",data)
@@ -43,7 +36,16 @@ const NewIssuePage = () => {
             }
           
           }
-          )} className='space-y-4'>
+          
+          )
+  return (
+    <div className='max-w-xl'>
+      {error && <Callout.Root color='red' className='mb-5'>
+        <Callout.Text>
+          {error}
+        </Callout.Text>
+        </Callout.Root>}
+      <form onSubmit={onSubmit} className='space-y-4'>
             <TextField.Root 
             placeholder='Title' {...register("title")}/>
             
