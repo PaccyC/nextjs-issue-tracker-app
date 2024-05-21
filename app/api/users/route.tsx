@@ -1,5 +1,5 @@
 import { NextRequest,NextResponse } from "next/server";
-import schema from "./schema";
+import {createUserSchema} from "../schema";
 import prisma from "@/prisma/prisma";
 export async function GET(request:NextRequest){
     const users= await prisma.user.findMany();
@@ -9,7 +9,7 @@ export async function GET(request:NextRequest){
 export async function POST(request:NextRequest){
     const body= await request.json()
 
-    const validation= schema.safeParse(body)
+    const validation= createUserSchema.safeParse(body)
     if(!validation.success){
         return NextResponse.json({error:validation.error.errors},{status:400})
     }
