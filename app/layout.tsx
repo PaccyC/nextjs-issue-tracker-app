@@ -24,15 +24,17 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="winter" className={inter.variable}>
       <body className={inter.className}>
-       
-      <Theme accentColor="violet">
+      <AuthProvider>
+        <Theme accentColor="violet">
 
-          <NavBar/>
-          <main className="p-5">
-            <Container> {children}</Container>
-            </main>
-          
-          </Theme>
+        <NavBar/>
+        <main className="p-5">
+          <Container> {children}</Container>
+          </main>
+
+        </Theme>
+      </AuthProvider>
+      z
           
       
         </body>
