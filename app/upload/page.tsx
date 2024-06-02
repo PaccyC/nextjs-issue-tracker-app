@@ -1,6 +1,6 @@
 "use client"
 
-import { CldUploadWidget,CldImage, CloudinaryUploadWidgetResults } from 'next-cloudinary'
+import { CldUploadWidget,CldImage } from 'next-cloudinary'
 import { useState } from 'react'
 
 
